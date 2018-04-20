@@ -2,7 +2,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import 'rxjs/add/operator/map';
-//import 'rxjs/operator/map';
 
 @Injectable()
 export class UsersService{
@@ -16,17 +15,12 @@ export class UsersService{
       .map(users => {
         return users.map(user => {
           return{
-            name: user.name.first + '' + user.name.last
+            name: user.name.first + ' ' + user.name.last,
+            image: user.picture.large,
+            geo: user.location.city + ' ' + user.location.state
           }
         })
       })
   }
 
-  // users = [
-  //   {name: 'Name1'},
-  //   {name: 'Name2'},
-  //   {name: 'Name3'},
-  //   {name: 'Name4'},
-  //   {name: 'Name5'}
-  // ]
 }

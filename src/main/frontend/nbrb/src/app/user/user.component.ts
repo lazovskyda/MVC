@@ -6,6 +6,15 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent{
-  @Input() user;
+  @Input() public user:any;
+
+  private isMarked:boolean = false;
+
+  onClick(){
+    console.log("click");
+    this.isMarked = true;
+
+  }
 
 }
+

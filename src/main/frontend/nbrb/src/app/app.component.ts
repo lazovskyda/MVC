@@ -13,14 +13,15 @@ export class AppComponent {
   // title = 'My title';
   // title2 = 'Second title';
 
-  users = [];
+  public users = [];
+  public searchStr = '';
 
   constructor(private usersService: UsersService){
 
   }
   ngOnInit(){
     this.usersService.getUsers().subscribe( users => {
-      console.log(users);
+      this.users = users;
     });
   }
 }
