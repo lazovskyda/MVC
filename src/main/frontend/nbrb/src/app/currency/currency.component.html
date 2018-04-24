@@ -18,3 +18,12 @@
   </tr>
   </tbody>
 </table>
+
+
+<div class="row">
+  <div class="input-field col s6">
+    <input placeholder="Enter Currency ID" id="first_name2" type="text" class="validate" [(ngModel)]="newCurrencyId">
+    <label class="active" for="first_name2">First Name</label>
+  </div>
+</div>
+<a class="waves-effect waves-light btn" (click)="getCurrency(newCurrencyId)">button</a>
