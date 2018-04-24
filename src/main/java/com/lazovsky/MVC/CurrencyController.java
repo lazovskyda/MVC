@@ -2,21 +2,20 @@ package com.lazovsky.MVC;
 
 
 import com.lazovsky.MVC.models.Currency;
-import com.lazovsky.MVC.models.CurrencyDto;
+
 import com.lazovsky.MVC.models.CurrencyMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.HttpURLConnection;
+
 import java.net.URI;
-import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class CurrencyController {
@@ -25,8 +24,14 @@ public class CurrencyController {
     private Currency testCurrency = new Currency();
 
 
-    @RequestMapping("/api")
-    public CurrencyMapper showHelloWorld() {
+    @RequestMapping(value = "/api/{currencyId}", method = RequestMethod.GET)
+    public CurrencyMapper showHelloWorld(@PathVariable("currencyId") String currencyId) {
+
+
+        Map<String, String> params = new HashMap<>();
+        params.put("currencyId", currencyId);
+
+
 
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -35,12 +40,12 @@ public class CurrencyController {
             headers.add("Accept", "*/*");
 
 
-            URI url = new URI("http://www.nbrb.by/API/ExRates/Rates/USD?ParamMode=2");
-
+            //URI url = new URI("http://www.nbrb.by/API/ExRates/Rates/{currencyId}?ParamMode=2");
+            String url = "http://www.nbrb.by/API/ExRates/Rates/{currencyId}?ParamMode=2";
 
             HttpEntity<String> requestEntity = new HttpEntity<String>("", headers);
             //ResponseEntity<CurrencyMapper> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, CurrencyMapper.class);
-            CurrencyMapper response = restTemplate.getForObject(url, CurrencyMapper.class);
+            CurrencyMapper response = restTemplate.getForObject(url, CurrencyMapper.class, params);
             //return responseEntity.getBody();
             return response;
 
