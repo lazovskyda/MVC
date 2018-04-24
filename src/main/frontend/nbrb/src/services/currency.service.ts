@@ -11,7 +11,7 @@ export class CurrencyService {
 
   getCurrency(currencyName) {
 
-    let URL = 'http://www.nbrb.by/API/ExRates/Rates/'+ currencyName +'?ParamMode=2';
+    let URL = 'http://localhost:8090/api/'+ currencyName;
 
     return this.http.get(URL)
       .map(currency => {

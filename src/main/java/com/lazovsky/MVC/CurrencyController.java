@@ -6,10 +6,7 @@ import com.lazovsky.MVC.models.Currency;
 import com.lazovsky.MVC.models.CurrencyMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -23,7 +20,7 @@ public class CurrencyController {
 
     private Currency testCurrency = new Currency();
 
-
+    @CrossOrigin
     @RequestMapping(value = "/api/{currencyId}", method = RequestMethod.GET)
     public CurrencyMapper showHelloWorld(@PathVariable("currencyId") String currencyId) {
 
@@ -35,15 +32,15 @@ public class CurrencyController {
 
         try {
             RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Type", "application/json");
-            headers.add("Accept", "*/*");
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("Content-Type", "application/json");
+//            headers.add("Accept", "*/*");
 
 
             //URI url = new URI("http://www.nbrb.by/API/ExRates/Rates/{currencyId}?ParamMode=2");
             String url = "http://www.nbrb.by/API/ExRates/Rates/{currencyId}?ParamMode=2";
 
-            HttpEntity<String> requestEntity = new HttpEntity<String>("", headers);
+        //    HttpEntity<String> requestEntity = new HttpEntity<String>("", headers);
             //ResponseEntity<CurrencyMapper> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, CurrencyMapper.class);
             CurrencyMapper response = restTemplate.getForObject(url, CurrencyMapper.class, params);
             //return responseEntity.getBody();
