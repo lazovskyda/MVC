@@ -1,0 +1,20 @@
+<table>
+  <thead>
+  <tr>
+    <th>Currency</th>
+    <th>Date</th>
+    <th>Rate</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr
+    *ngFor="let currency of getKeys(currencies)"
+  >
+    <td>{{currency.currencyName}}</td>
+    <td>{{currency.date}}</td>
+    <td>{{currency.rate}}</td>
+
+  </tr>
+  </tbody>
+</table>
